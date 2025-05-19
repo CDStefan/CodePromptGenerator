@@ -104,9 +104,13 @@ class CodeToMarkdownApp:
         prompt_frame = tk.LabelFrame(main_frame, text="Custom Prompt (Optional)", padx=5, pady=5)
         prompt_frame.pack(fill=tk.X, pady=5)
         
-        self.prompt_text = scrolledtext.ScrolledText(prompt_frame, height=4, wrap=tk.WORD)
+        self.prompt_text = scrolledtext.ScrolledText(prompt_frame, height=10, wrap=tk.WORD)
         self.prompt_text.pack(fill=tk.X, expand=True)
-        self.prompt_text.insert(tk.END, "Analyse in detail the following code and generate improvements.\n")
+        defaultPrompt:str = """I will give you kotlin code from an android app project that uses compose , Room and MVVM architecture.
+Examine in detail the kotlin code.
+Generate a solution for the following problem:
+"""
+        self.prompt_text.insert(tk.END, defaultPrompt)
 
         # --- Output Destination ---
         output_frame = tk.LabelFrame(main_frame, text="Output Markdown File", padx=5, pady=5)
