@@ -108,7 +108,7 @@ class CodeToMarkdownApp:
         self.prompt_text.pack(fill=tk.X, expand=True)
         defaultPrompt:str = """I will give you kotlin code from an android app project that uses compose , Room and MVVM architecture.
 Examine in detail the kotlin code.
-Generate a solution for the following problem:
+Generate a solution for the following problem and a step by step guide on how to implment it:
 """
         self.prompt_text.insert(tk.END, defaultPrompt)
 
