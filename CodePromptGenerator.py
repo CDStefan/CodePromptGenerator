@@ -106,9 +106,9 @@ class CodeToMarkdownApp:
         
         self.prompt_text = scrolledtext.ScrolledText(prompt_frame, height=10, wrap=tk.WORD)
         self.prompt_text.pack(fill=tk.X, expand=True)
-        defaultPrompt:str = """I will give you kotlin code from an android app project that uses compose , Room and MVVM architecture.
-Examine in detail the kotlin code.
-Generate a solution for the following problem and the code files to implement it:
+        defaultPrompt:str = """I will give you code mainly in kotlin from an android app project that uses compose , Room and MVVM architecture.
+Examine in detail the code.
+Generate a solution for the following problem and the code files to implement it and make sure to avoid creating bugs:
 """
         self.prompt_text.insert(tk.END, defaultPrompt)
 
