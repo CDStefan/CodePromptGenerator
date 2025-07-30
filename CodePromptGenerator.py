@@ -65,7 +65,8 @@ class CodeToMarkdownApp:
             ".yml": "yaml",
             ".sql": "sql",
             ".r": "r",
-            ".pl": "perl"
+            ".pl": "perl",
+            ".xsd": "xml"
         }
 
         self.setup_ui()
