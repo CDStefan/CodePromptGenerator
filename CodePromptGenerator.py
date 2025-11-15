@@ -128,14 +128,18 @@ Generate a solution for the following problem and the code files to implement it
         self.generate_button.pack(fill=tk.X, pady=20)
 
     def add_folders(self):
-        folders = filedialog.askdirectory(mustexist=True, title="Select Folder(s)")
-        if folders: # askdirectory returns a single string, not a tuple for multiple
-            if folders not in self.selected_folders:
-                self.selected_folders.append(folders)
-                self.folder_listbox.insert(tk.END, folders)
-            else:
-                messagebox.showinfo("Info", f"Folder '{folders}' already added.")
-        self.update_listboxes()
+        # askdirectory doesn't support multiple selections. As a workaround, we can use
+        # askopenfilenames and derive the directories from the selected files.
+        # The title will guide the user on how to select folders.
+        files = filedialog.askopenfilenames(title="Select a file from each folder you want to add")
+        if files:
+            added_folders = set()
+            for f_path in files:
+                folder_path = str(pathlib.Path(f_path).parent)
+                if folder_path not in self.selected_folders and folder_path not in added_folders:
+                    self.selected_folders.append(folder_path)
+                    added_folders.add(folder_path)
+            self.update_listboxes()
 
     def remove_selected_folders(self):
         selected_indices = self.folder_listbox.curselection()
