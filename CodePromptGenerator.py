@@ -14,7 +14,7 @@ class CodeToMarkdownApp:
     def __init__(self, root):
         self.root = root
         self.root.title("Code to Markdown Converter")
-        self.root.geometry("700x750") # Adjusted size for more content
+        self.root.geometry("700x600") # Adjusted size for more content
 
         self.selected_folders = []
         self.selected_files = []
@@ -100,18 +100,6 @@ class CodeToMarkdownApp:
         
         self.remove_file_button = tk.Button(file_frame, text="Remove Selected File(s)", command=self.remove_selected_files)
         self.remove_file_button.pack(fill=tk.X, pady=(0,5))
-
-        # --- Custom Prompt ---
-        prompt_frame = tk.LabelFrame(main_frame, text="Custom Prompt (Optional)", padx=5, pady=5)
-        prompt_frame.pack(fill=tk.X, pady=5)
-        
-        self.prompt_text = scrolledtext.ScrolledText(prompt_frame, height=10, wrap=tk.WORD)
-        self.prompt_text.pack(fill=tk.X, expand=True)
-        defaultPrompt:str = """I will give you code mainly in kotlin from an android app project that uses compose , Room and MVVM architecture.
-Examine in detail the code.
-Generate a solution for the following problem and the code files to implement it and make sure to avoid creating bugs:
-"""
-        self.prompt_text.insert(tk.END, defaultPrompt)
 
         # --- Output Destination ---
         output_frame = tk.LabelFrame(main_frame, text="Output Markdown File", padx=5, pady=5)
@@ -232,10 +220,7 @@ Generate a solution for the following problem and the code files to implement it
             messagebox.showinfo("No Code Files", "No processable files found in the selected locations or with supported extensions.")
             return
 
-        markdown_content = []
-        custom_prompt = self.prompt_text.get("1.0", tk.END).strip()
-        if custom_prompt:
-            markdown_content.append("## Instruction:\n\n"+custom_prompt + "\n\n## Code:\n\n")
+        markdown_content = ["## Code:\n\n"]
 
         processed_files_count = 0
         # Sort files for consistent output, e.g., by full path
