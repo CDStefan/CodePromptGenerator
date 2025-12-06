@@ -21,7 +21,7 @@ class CodeToMarkdownApp:
 
         # --- Default Output ---
         timestamp = datetime.now().strftime("%Y-%m-%d %H_%M")
-        default_filename = f"{timestamp} output_file.md"
+        default_filename = f"{timestamp} codebase_file.md"
         
         if platform.system() == "Windows":
             self.output_destination_path = pathlib.Path.home() / "Desktop" / default_filename
